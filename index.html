@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+   
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <title>Assignment</title>
+</head>
+<body ng-app="myApp"> 
+    <script type="text/ng-template" id="pages/f1.html">
+        <form action="" >
+     
+            <h1 style="color:red;"  >Enter Details</h1>
+          
+              <table  style="background-color:#f1f1f1; text-align:center; ">
+                <tr>
+                <td>
+                  <br><label class="text" for=""><b>Name</b></label>
+                  
+                </td>
+                <td><br><input type="text" name="" class="form-control" id="" placeholder="eg.Reuben Tom Koshy" required></td>
+                </tr>
+                <tr>
+                <td><br><label class="text" for="">Roll No.</label>
+                </td>
+                <td><br><input type="text" name="" class="form-control" id="" placeholder="eg.start with MCA" pattern="MCA.+" required>
+                </td>
+
+              </tr>
+              <tr>
+                <td><br><label class="text" for="">Email</label></td>
+              <td><br><input type="EMAIL"  class="form-control"  placeholder="Enter Email ID" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required></td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td> </td>
+              </tr>
+                <tr>
+                  <td><br><input class="btn btn-primary" type="submit" value="Submit"></td>
+                <td><br><input class="btn btn-info" type="reset" value="Reset"></td>
+                </tr>
+                         
+                </table>
+            
+           
+            
+          
+                
+                
+          
+           
+        </form>
+      </script>
+  
+      <script type="text/ng-template" id="pages/f2.html">
+       <form action="" style="background-color:#f1f1f1; text-align:ceter; float:right;">
+            <h1>Academic Results</h1>
+            <div class="form-group">
+                <label class="text" for=""><b>MCA Marks</b></label><br><br>
+                <label class="text" for=""><b>Semester 1</b></label>
+                <input type="number" name="" class="form-control" id="" ng-model="s1" required>
+            </div>
+            <div class="form-group">
+                <label class="text" for="">Semester 2</label>
+                <input type="number" name="" class="form-control" id="" ng-model="s2" required>
+            </div>
+            <div class="form-group">
+                <label class="text" for="">Semester 3</label>
+                <input type="number" name="" class="form-control" id="" ng-model="s3" required>
+            </div>
+            <div class="form-group">
+                <label class="text" for="">Semester 4</label>
+                <input type="number" name="" class="form-control" id="" ng-model="s4" required>
+            </div>
+            <div class="form-group">
+                <label class="text" for="">Aggregate : {{ (s1+s2+s3+s4)/4 }}</label>
+                <!-- <input type="number" name="" class="form-control" id="" required> -->
+            </div><br>
+            <div class="form-group">
+                <label class="text" for="">Programming languages known:</label><br><br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">C</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">CPP</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">JAVA</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">Python</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">C#</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark">R</span>
+                <br>
+                <input class="" type="checkbox" name="" class="form-control" id="" ><span class="checkmark" >Angular js</span>
+            </div><br>
+            <div class="form-group">
+                <label class="text" for="">Extra Cirricular Activities</label>
+                <input type="text" name="" class="form-control" id="" required>
+            </div>
+            <input class="btn btn-danger" type="submit" value="Submit" >
+            
+        </form>
+      </script>
+  
+
+      <div style="float:left" class="container2">
+        <a href="#/" class="btn btn-info">Student Details</a>
+        <a href="#/f2" class="btn btn-info">Academic Details</a>
+
+        <div class="container3" ng-view>
+        
+        </div>
+      </div>
+
+
+<script>
+    var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function($routeProvider) {
+  $routeProvider
+
+  .when('/', {
+    templateUrl : 'pages/f1.html',
+    controller  : 'HomeController'
+  })
+
+  .when('/f2', {
+    templateUrl : 'pages/f2.html',
+    controller  : 'BlogController'
+  })
+
+  .otherwise({redirectTo: '/'});
+});
+
+app.controller('HomeController', function($scope) {
+  $scope.message = 'Hello from HomeController';
+});
+
+app.controller('BlogController', function($scope) {
+    $scope.s1=0;
+    $scope.s2=0;
+    $scope.s3=0;
+    $scope.s4=0;
+  $scope.avg = $scope.s1+$scope.s2+$scope.s3+$scope.s4;
+});
+
+app.controller('AboutController', function($scope) {
+  $scope.message = 'Hello from AboutController';
+});
+
+    </script>
+        
+</body>
+</html>
